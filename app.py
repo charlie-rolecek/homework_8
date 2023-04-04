@@ -1,6 +1,7 @@
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for, flash
 
 app = Flask(__name__)
+app.config["SECRET_KEY"] = "our_secret_key"
 
 friends_dict = [
     {"name": "Test", "flavor": "swirl", "read": "yes", "activities": "reading"}
@@ -9,6 +10,7 @@ friends_dict = [
 
 @app.route("/", methods=["GET", "POST"])
 def index():
+    flash('Record successfully added.', 'success')
     return render_template(
         "index.html", pageTitle="Web form template", friends=friends_dict
     )
